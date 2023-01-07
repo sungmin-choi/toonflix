@@ -35,9 +35,11 @@ class CurrencyCard extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Text(amount,
-                    style: TextStyle(
-                        color: textColor.withOpacity(0.8), fontSize: 17)),
+                Text(
+                  amount,
+                  style: TextStyle(
+                      color: textColor.withOpacity(0.8), fontSize: 17),
+                ),
                 const SizedBox(width: 10),
                 Text(
                   code,
