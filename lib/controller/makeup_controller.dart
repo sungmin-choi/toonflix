@@ -3,6 +3,7 @@ import 'package:toonflix/data/services.dart';
 import 'package:toonflix/model/makeup_model.dart';
 
 class MakeUpController extends GetxController {
+  static MakeUpController get to => Get.find();
   var productList = <Product>[].obs;
   var loading = true.obs;
   @override

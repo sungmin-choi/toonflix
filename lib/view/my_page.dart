@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toonflix/view/product_tile.dart';
 
+import '../controller/makeup_cart_controller.dart';
 import '../controller/makeup_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -9,6 +10,7 @@ class MyPage extends StatelessWidget {
   MyPage({super.key});
 
   final controller = Get.put(MakeUpController());
+  final makeUpCartController = Get.put(MakeUpCartController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +47,14 @@ class MyPage extends StatelessWidget {
                 ),
         ),
       ),
+      floatingActionButton: GetX<MakeUpCartController>(builder: (controller) {
+        return FloatingActionButton.extended(
+          onPressed: () => {},
+          label: Text(controller.count.toString(),
+              style: const TextStyle(fontSize: 20)),
+          icon: const Icon(Icons.add_shopping_cart_sharp),
+        );
+      }),
     );
   }
 }

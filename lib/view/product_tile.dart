@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:toonflix/controller/makeup_cart_controller.dart';
 import '../model/makeup_model.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;
-  const ProductTile(this.product);
-
+  ProductTile(this.product);
+  final controller = Get.find<MakeUpCartController>();
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -50,26 +51,49 @@ class ProductTile extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.w400),
             overflow: TextOverflow.ellipsis, // 글자 길이가 넘어가면 ... 으로 변경 설정
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  product.rating.toString(),
-                  style: const TextStyle(color: Colors.white),
+          Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                const Icon(
-                  Icons.star,
-                  size: 16,
-                  color: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      product.rating.toString(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    const Icon(
+                      Icons.star,
+                      size: 16,
+                      color: Colors.white,
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Container(
+                height: 20,
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(12)),
+                padding: const EdgeInsets.all(0),
+                child: TextButton(
+                  onPressed: () => {controller.addToCart(product)},
+                  style: TextButton.styleFrom(
+                    minimumSize: Size.zero,
+                    padding: const EdgeInsets.all(2),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  child: const Text(
+                    'add to cart',
+                    style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                ),
+              ),
+            ],
           ),
           Text(
             '\$${product.price}',

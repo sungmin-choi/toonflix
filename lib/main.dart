@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toonflix/view/my_page.dart';
 
 void main() {
-  runApp(const App());
+  runApp(const GetMaterialApp(home: App()));
 }
 
 class App extends StatelessWidget {
