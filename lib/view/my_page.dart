@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:toonflix/view/product_tile.dart';
 
 import '../controller/makeup_controller.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class MyPage extends StatelessWidget {
   MyPage({super.key});
@@ -22,20 +23,26 @@ class MyPage extends StatelessWidget {
           IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Obx(
-          () => GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
-              mainAxisSpacing: 10, //수평 Padding
-              crossAxisSpacing: 10, //수직 Padding
-            ),
-            itemCount: controller.productList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ProductTile(controller.productList[index]);
-            },
-          ),
+      body: Obx(
+        () => Padding(
+          padding: const EdgeInsets.all(10),
+          // ignore: unrelated_type_equality_checks
+          child: controller.loading.value == true
+              ? const SpinKitRotatingCircle(
+                  color: Colors.black,
+                  size: 50.0,
+                )
+              : GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
+                    mainAxisSpacing: 10, //수평 Padding
+                    crossAxisSpacing: 10, //수직 Padding
+                  ),
+                  itemCount: controller.productList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ProductTile(controller.productList[index]);
+                  },
+                ),
         ),
       ),
     );

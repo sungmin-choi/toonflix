@@ -4,7 +4,7 @@ import 'package:toonflix/model/makeup_model.dart';
 
 class MakeUpController extends GetxController {
   var productList = <Product>[].obs;
-
+  var loading = true.obs;
   @override
   void onInit() {
     super.onInit();
@@ -16,5 +16,6 @@ class MakeUpController extends GetxController {
     if (products != null) {
       productList.value = products;
     }
+    loading.value = false;
   }
 }
